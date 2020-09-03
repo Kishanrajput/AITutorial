@@ -1,0 +1,13 @@
+/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /Users/kishan/AITutorial
+-- Using JANA_HOME = ~/jana_home/bin (From JANA_HOME environment variable)
+CMake Error at /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindPackageHandleStandardArgs.cmake:164 (message):
+  Could NOT find JANA (missing: JANA_INCLUDE_DIR JANA_LIBRARY) (found version
+  "2")
+Call Stack (most recent call first):
+  /Applications/CLion.app/Contents/bin/cmake/mac/share/cmake-3.17/Modules/FindPackageHandleStandardArgs.cmake:445 (_FPHSA_FAILURE_MESSAGE)
+  cmake/FindJANA.cmake:64 (find_package_handle_standard_args)
+  src/CMakeLists.txt:25 (find_package)
+
+
+-- Configuring incomplete, errors occurred!
+See also "/Users/kishan/AITutorial/cmake-build-debug/CMakeFiles/CMakeOutput.log".
