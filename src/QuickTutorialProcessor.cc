@@ -12,6 +12,8 @@
 #include <fstream>
 #include <string.h>
 
+#include <bits/stdc++.h> 
+
 QuickTutorialProcessor::QuickTutorialProcessor() {
     SetTypeName(NAME_OF_THIS); // Provide JANA with this class's name
 }
@@ -23,7 +25,7 @@ void QuickTutorialProcessor::Init() {
     // New code here --------------------------------
     //Model model("../model.pb");
 
-
+    //start = clock();
     // Tensor input_a{model, "input_a"};
     // Tensor input_b{model, "input_b"};
     // Tensor output{model, "result"};
@@ -67,9 +69,12 @@ void QuickTutorialProcessor::Process(const std::shared_ptr<const JEvent> &event)
     // std::cout << std::endl;
 
     // Create model
-    Model m("../model.pb");
-    
-    m.restore("../checkpoint/train.ckpt");
+    std::cout<<"Loading Model..........."<<std::endl;
+    Model m("../MNIST_new/model.pb");
+    std::cout<<"Model Loaded.............."<<std::endl;
+
+    m.restore("../MNIST_new/checkpoint/train.ckpt");
+    std::cout<<"Weights loaded and initialized.........."<<std::endl;
     
     // Create Tensors
     Tensor input(m, "input", 1, 784);
@@ -90,7 +95,7 @@ void QuickTutorialProcessor::Process(const std::shared_ptr<const JEvent> &event)
 
     std::ifstream inFile;
 
-    inFile.open("../Images.txt");
+    inFile.open("../Images_large.txt");
 
     if(!inFile) {
         std::cout << "Unable to open images file..." << std::endl;
@@ -102,7 +107,7 @@ void QuickTutorialProcessor::Process(const std::shared_ptr<const JEvent> &event)
         //std::cout<<"Character: "<<c<<"  :"<<std::endl;
         std::vector<double> img_data;
         float num = 0;
-        for(int i=0;i<line.length();i++)
+        for(int i=2;i<line.length();i++)
         {
             if(line[i] != ',')
             {
@@ -148,7 +153,7 @@ void QuickTutorialProcessor::Process(const std::shared_ptr<const JEvent> &event)
         auto max_result = std::max_element(result.begin(), result.end());
 
         // Print result
-        std::cout << "Real label: " << count << ", predicted: " << std::distance(result.begin(), max_result)
+        std::cout << "Real label: " << line[0] << ", predicted: " << std::distance(result.begin(), max_result)
             << ", Probability: " << (*max_result) << std::endl;
         count = count + 1;
 
@@ -160,5 +165,8 @@ void QuickTutorialProcessor::Process(const std::shared_ptr<const JEvent> &event)
 void QuickTutorialProcessor::Finish() {
     // Close any resources
     LOG << "QuickTutorialProcessor::Finish" << LOG_END;
+    //double time_taken = double(clock() - start) / double(CLOCKS_PER_SEC); 
+    //cout << "Time taken by program is : " << time_taken; 
+    //cout << " sec " << endl; 
 }
 

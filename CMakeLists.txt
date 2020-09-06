@@ -1,5 +1,5 @@
 
-cmake_minimum_required(VERSION 3.9)
+cmake_minimum_required(VERSION 3.10)
 project(QuickTutorial_plugin_project)
 
 if(NOT "${CMAKE_CXX_STANDARD}")
